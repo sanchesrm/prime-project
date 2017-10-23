@@ -1,0 +1,24 @@
+.full-screen-div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+.full-screen-div .login-container {
+  margin-top: 90%;
+  width: 100%;
+  padding: 0 3rem 0 3rem;
+}
+.full-screen-div .btn-login {
+  background-color: black;
+  color: white;
+  border-color: black;
+  height: 4.5rem;
+  font-size: 17px;
+}
+.full-screen-div .rounded-input {
+  border-radius: 20px;
+}
+.full-screen-div .login-input {
+  height: 4.5rem;
+}
