@@ -15,10 +15,17 @@
   border-color: black;
   height: 4.5rem;
   font-size: 17px;
+  width: 100%;
 }
 .full-screen-div .rounded-input {
   border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 .full-screen-div .login-input {
   height: 4.5rem;
+}
+.full-screen-div .addon-style {
+  padding-left: 20px;
+  background-color: #fff;
 }

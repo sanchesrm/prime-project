@@ -3,6 +3,16 @@ import { Button, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-boo
 import './Login.css';
 
 class Login extends Component {
+	constructor(props){
+        super(props);
+        this.clickToLogin = this.clickToLogin.bind(this);
+    }
+
+    clickToLogin(ev) {
+    	ev.preventDefault();
+    	this.props.history.push('/HomePage');
+    }
+
 	render() {
 		return (
 			<div className="full-screen-div">
@@ -10,23 +20,23 @@ class Login extends Component {
 					<form>
 						<FormGroup>
 							<InputGroup>
-								<InputGroup.Addon>
+								<InputGroup.Addon className="addon-rounded addon-style">
 									<Glyphicon glyph="user"/>
 								</InputGroup.Addon>
-								<FormControl type="text" className="login-input" placeholder="Usuário"/>
+								<FormControl type="text" className="login-input input-rounded" placeholder="Usuário"/>
 							</InputGroup>
 						</FormGroup>
 
 						<FormGroup>
 							<InputGroup>
-								<InputGroup.Addon>
+								<InputGroup.Addon className="addon-rounded addon-style">
 									<Glyphicon glyph="lock"/>
 								</InputGroup.Addon>
-								<FormControl type="password" className="login-input" placeholder="Senha" />
+								<FormControl type="password" className="login-input input-rounded" placeholder="Senha" />
 							</InputGroup>
 						</FormGroup>
 
-						<Button className="btn-login rounded-input" block>Login</Button>
+						<Button className="btn-login rounded-input" onClick={this.clickToLogin} block>Login</Button>
 					</form>
 				</div>
 			</div>

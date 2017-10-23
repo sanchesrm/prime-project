@@ -1,0 +1,84 @@
+.homePage .search-group {
+  margin-top: 5px;
+}
+.homePage .search-group .search-addon {
+  background-color: #fff;
+  border: none;
+  border-color: #fff;
+}
+.homePage .search-group .search-addon .search-glyph {
+  width: 3rem;
+  font-size: 18px;
+}
+.homePage .search-group .search-input {
+  height: 5rem;
+  width: 100%;
+  border: none;
+  margin-left: -1px;
+  border-color: #fff;
+  font-size: 18px;
+  padding-right: 10rem;
+}
+.homePage .search-group .btn-search {
+  font-size: 18px;
+  position: absolute;
+  right: 12px;
+  height: 4rem;
+  margin-top: 0.5rem;
+  background-color: #d90101;
+  color: #fff;
+}
+.homePage .search-group .input-rounded {
+  border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  -webkit-border-top-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.homePage .search-group .addon-rounded {
+  border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.homePage .btn-anuncio {
+  border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  -webkit-border-top-right-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+  height: 12rem;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+.homePage .btn-anuncio.cadastrar {
+  background-color: #d90101;
+}
+.homePage .btn-anuncio.cadastrar img {
+  height: 8rem;
+}
+.homePage .btn-anuncio.cadastrar span {
+  margin-top: 0.5rem;
+  float: left;
+  text-align: left;
+  color: #fff;
+}
+.homePage .btn-anuncio.editar img {
+  height: 8rem;
+}
+.homePage .btn-anuncio.editar span {
+  line-height: 8rem;
+  vertical-align: center;
+}
