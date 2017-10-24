@@ -2,7 +2,7 @@
   "name": "projeto-prime",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://sanchesrm.github.io/prime-project",
+  "homepage": "http://sanchesrm.github.io/prime-project",
   "dependencies": {
     "node-less": "^1.0.0",
     "node-less-chokidar": "^0.1.2",
@@ -10,7 +10,9 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-toggle": "^4.0.2",
+    "react-toggle-button": "^2.1.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.14"

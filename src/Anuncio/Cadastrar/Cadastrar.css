@@ -5,7 +5,8 @@
 .cadastrarAnuncio .container.main-content span {
   color: white;
 }
-.cadastrarAnuncio .container.main-content .form-control {
+.cadastrarAnuncio .container.main-content .form-control,
+.cadastrarAnuncio .container.main-content .react-toggle {
   margin-top: 7px;
 }
 .cadastrarAnuncio .container.main-content .no-padding {

@@ -1,5 +1,8 @@
 import React from 'react'
-import { FormControl, Col, Row, Grid, Checkbox } from 'react-bootstrap';
+import Toggle from 'react-toggle'
+import { FormControl, Col, Row, Grid, Checkbox, Label } from 'react-bootstrap'
+// import { ToggleButton,  styles } from 'react-toggle-button'
+// import ToggleButton from 'react-toggle-button'
 import NavBar from '../../NavBar/NavBar'
 import './Cadastrar.css'
 
@@ -87,10 +90,10 @@ class Cadastrar extends React.Component {
 						</Row>
 						<Row>
 							<Col xs={6} className="no-padding first-child">
-								<FormControl placeholder="Final da Placa" />
-							</Col>
-							<Col xs={6} className="no-padding second-child">
-								<FormControl placeholder="Preço" />
+								<label className="label-checkbox">
+									<Toggle icons={false} />
+									<span>No icons</span>
+								</label>
 							</Col>
 						</Row>
 					</Grid>
