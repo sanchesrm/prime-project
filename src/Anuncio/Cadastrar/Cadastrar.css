@@ -1,0 +1,34 @@
+.cadastrarAnuncio .container.main-content {
+  padding: 0 4rem 0 4rem;
+}
+.cadastrarAnuncio .container.main-content h3,
+.cadastrarAnuncio .container.main-content span {
+  color: white;
+}
+.cadastrarAnuncio .container.main-content .form-control {
+  margin-top: 7px;
+}
+.cadastrarAnuncio .container.main-content .no-padding {
+  padding: 0;
+}
+.cadastrarAnuncio .container.main-content .no-padding.first-child {
+  padding-right: 5px;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group {
+  margin-top: 7px;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .row {
+  background-color: #fff;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .checkboxes {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group span {
+  font-size: 13px;
+  color: #323237;
+}
+.cadastrarAnuncio .container.main-content textarea.form-control {
+  height: 100px;
+  resize: none;
+}

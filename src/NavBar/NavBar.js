@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar, NavItem, Nav } from 'react-bootstrap';
 import './NavBar.css'
 import prime_logo from '../images/prime_logo.png';
@@ -8,7 +8,7 @@ class NavBar extends React.Component {
 		return (
 			<Navbar bsStyle="inverse">
 				<Navbar.Header>
-					<Navbar.Toggle/>
+					<Navbar.Toggle className="pull-left"/>
 					<Navbar.Brand>
 						<a>
 							<img className="prime_logo" src={prime_logo} />

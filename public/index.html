@@ -11,6 +11,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -23,10 +24,17 @@
     <title>Projeto Prime</title>
   </head>
   <body>
+<!--     <script>
+      $( document ).ready(function() {
+        $(window).on("orientationchange",function(){
+         event.stopPropagation();
+        }); 
+      });
+    </script> -->
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div id="root" class="full-size-div"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

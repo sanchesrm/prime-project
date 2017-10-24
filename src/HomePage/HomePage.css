@@ -82,3 +82,6 @@
   line-height: 8rem;
   vertical-align: center;
 }
+.homePage .container .container-buttons {
+  padding-top: 0.5rem;
+}
