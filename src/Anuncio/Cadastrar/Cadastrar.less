@@ -70,9 +70,16 @@
 		    margin: -10px -15px;
 		    text-decoration: none;
 		}
-		
+
 		.panel-title a:not(.collapsed) {
 			background-color: #d90101;
+		}
+
+		input[type=checkbox] + label::after {
+			content: "+";
+		}
+		input[type=checkbox]:checked + label::after {
+			transform: rotate(315deg);
 		}
 	}
 
