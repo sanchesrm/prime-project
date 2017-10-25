@@ -25,18 +25,58 @@
 			}
 			.checkboxes {
 				padding-left: 15px;
-				padding-right: 15px;
+				padding-right: 15px; 
 			}
 
 			span {
 				font-size: 13px;
 				color: #323237;
 			}
+
 		}
+
+		.toggle-group {
+			margin-top: 7px;
+			.label-default {
+				background-color: transparent;
+				span {
+					margin-left: 10px;
+				}
+			}
+		}
+
 
 		textarea.form-control{
 			height: 100px;
 			resize: none;
 		}
+	}
+
+	.panel-group {
+		.panel-heading {
+			background-color: #2b2b2f;
+		}
+
+		.panel.panel-default {
+			border-color: #323237;
+			width: 105%;
+			margin-left: -5px;
+		}
+
+		.panel-title a {
+			color: #fff;
+		    display: block;
+		    padding: 10px 15px;
+		    margin: -10px -15px;
+		    text-decoration: none;
+		}
+		
+		.panel-title a:not(.collapsed) {
+			background-color: #d90101;
+		}
+	}
+
+	.panel-group .panel+.panel {
+		margin-top: 0px;
 	}
 }

@@ -1,12 +1,15 @@
 import React from 'react'
 import Toggle from 'react-toggle'
-import { FormControl, Col, Row, Grid, Checkbox, Label } from 'react-bootstrap'
-// import { ToggleButton,  styles } from 'react-toggle-button'
-// import ToggleButton from 'react-toggle-button'
+import { FormControl, Col, Row, Grid, Checkbox, Label, PanelGroup, Panel, Accordion } from 'react-bootstrap'
+import PanelHeader from './Components/PanelHeader'
 import NavBar from '../../NavBar/NavBar'
 import './Cadastrar.css'
 
 class Cadastrar extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return (
 			<div className="cadastrarAnuncio">
@@ -88,16 +91,60 @@ class Cadastrar extends React.Component {
 						<Row>
       						<FormControl componentClass="textarea" placeholder="Observações do Vendedor" />
 						</Row>
-						<Row>
-							<Col xs={6} className="no-padding first-child">
-								<label className="label-checkbox">
-									<Toggle icons={false} />
-									<span>No icons</span>
-								</label>
-							</Col>
-						</Row>
+						<div className="toggle-group">
+							<Row>
+								<Col xs={6} className="no-padding first-child">
+									<Label className="label-checkbox">
+										<Toggle icons={false} />
+										<span>Facebook</span>
+									</Label>
+								</Col>
+								<Col xs={6} className="no-padding first-child">
+									<Label className="label-checkbox">
+										<Toggle icons={false} />
+										<span>Instagram</span>
+									</Label>
+								</Col>
+							</Row>
+							<Row>
+								<Col xs={6} className="no-padding first-child">
+									<Label className="label-checkbox">
+										<Toggle icons={false} />
+										<span>Site</span>
+									</Label>
+								</Col>
+								<Col xs={6} className="no-padding first-child">
+									<Label className="label-checkbox">
+										<Toggle icons={false} />
+										<span>OLX</span>
+									</Label>
+								</Col>
+							</Row>
+							<Row>
+								<Col xs={6} className="no-padding first-child">
+									<Label className="label-checkbox">
+										<Toggle icons={false} />
+										<span>Mercado Livre</span>
+									</Label>
+								</Col>
+							</Row>
+						</div>
 					</Grid>
 				</div>
+					<Grid>
+						<Row><h3>Opções de Publicação</h3></Row>
+						<Row>
+							<Accordion> 
+								<Panel header="OLX" eventKey="1">Panel 1 content</Panel>
+								<Panel header="Mercado Livre" eventKey="2">Panel 2 content</Panel>
+								<Panel header="Facebook" eventKey="3">Panel 2 content</Panel>
+								<Panel header="Facebook" eventKey="4">Panel 2 content</Panel>
+								<Panel header="Instagram" eventKey="5">Panel 2 content</Panel>
+								<Panel header="Site" eventKey="6">Panel 2 content</Panel>
+								<Panel header="Site" eventKey="7" header={<PanelHeader />}>Panel 2 content</Panel>
+							</Accordion>
+						</Row>
+					</Grid>
 			</div>
 		)
 	}

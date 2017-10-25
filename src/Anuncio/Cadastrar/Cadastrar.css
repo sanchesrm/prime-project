@@ -29,7 +29,37 @@
   font-size: 13px;
   color: #323237;
 }
+.cadastrarAnuncio .container.main-content .toggle-group {
+  margin-top: 7px;
+}
+.cadastrarAnuncio .container.main-content .toggle-group .label-default {
+  background-color: transparent;
+}
+.cadastrarAnuncio .container.main-content .toggle-group .label-default span {
+  margin-left: 10px;
+}
 .cadastrarAnuncio .container.main-content textarea.form-control {
   height: 100px;
   resize: none;
+}
+.cadastrarAnuncio .panel-group .panel-heading {
+  background-color: #2b2b2f;
+}
+.cadastrarAnuncio .panel-group .panel.panel-default {
+  border-color: #323237;
+  width: 105%;
+  margin-left: -5px;
+}
+.cadastrarAnuncio .panel-group .panel-title a {
+  color: #fff;
+  display: block;
+  padding: 10px 15px;
+  margin: -10px -15px;
+  text-decoration: none;
+}
+.cadastrarAnuncio .panel-group .panel-title a:not(.collapsed) {
+  background-color: #d90101;
+}
+.cadastrarAnuncio .panel-group .panel + .panel {
+  margin-top: 0px;
 }
