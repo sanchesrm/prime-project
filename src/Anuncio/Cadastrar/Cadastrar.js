@@ -1,7 +1,6 @@
 import React from 'react'
 import Toggle from 'react-toggle'
 import { FormControl, Col, Row, Grid, Checkbox, Label, PanelGroup, Panel, Accordion } from 'react-bootstrap'
-import PanelHeader from './Components/PanelHeader'
 import NavBar from '../../NavBar/NavBar'
 import './Cadastrar.css'
 
@@ -148,6 +147,5 @@ class Cadastrar extends React.Component {
 		)
 	}
 };
-								// <Panel eventKey="7" header={<PanelHeader />}>Panel 2 content</Panel>
 
 export default Cadastrar;

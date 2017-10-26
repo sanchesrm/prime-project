@@ -29,6 +29,42 @@
   font-size: 13px;
   color: #323237;
 }
+.cadastrarAnuncio .container.main-content .checkbox-group .checkbox label {
+  padding-left: 0px;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .checkbox label input[type=checkbox] {
+  position: absolute;
+  z-index: -1000;
+  left: -1000px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .checkbox label input[type=checkbox] + span {
+  padding-left: 23px;
+  height: 18px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .checkbox label input[type=checkbox]:checked + span {
+  background-position: 0 -18px;
+}
+.cadastrarAnuncio .container.main-content .checkbox-group .checkbox label span {
+  background-image: url(../../images/checkbox_red.png);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .cadastrarAnuncio .container.main-content .toggle-group {
   margin-top: 7px;
 }
@@ -60,7 +96,6 @@
 }
 .cadastrarAnuncio .panel-group .panel.panel-default {
   border-color: #323237;
-  width: 105%;
   margin-left: -5px;
   border-top: none;
 }
