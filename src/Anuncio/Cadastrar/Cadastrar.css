@@ -45,10 +45,24 @@
 .cadastrarAnuncio .panel-group .panel-heading {
   background-color: #2b2b2f;
 }
+.cadastrarAnuncio .panel-group .panel-heading label::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 3em;
+  height: 3em;
+  line-height: 3;
+  text-align: center;
+  -webkit-transition: all .35s;
+  -o-transition: all .35s;
+  transition: all .35s;
+}
 .cadastrarAnuncio .panel-group .panel.panel-default {
   border-color: #323237;
   width: 105%;
   margin-left: -5px;
+  border-top: none;
 }
 .cadastrarAnuncio .panel-group .panel-title a {
   color: #fff;
@@ -56,6 +70,16 @@
   padding: 10px 15px;
   margin: -10px -15px;
   text-decoration: none;
+}
+.cadastrarAnuncio .panel-group .panel-title a.collapsed:before {
+  content: "+";
+  margin-right: 10px;
+  font-size: 20px;
+}
+.cadastrarAnuncio .panel-group .panel-title a:not(.collapsed):before {
+  content: "-";
+  margin-right: 15px;
+  font-size: 20px;
 }
 .cadastrarAnuncio .panel-group .panel-title a:not(.collapsed) {
   background-color: #d90101;

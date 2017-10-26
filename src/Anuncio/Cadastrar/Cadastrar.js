@@ -141,7 +141,6 @@ class Cadastrar extends React.Component {
 								<Panel header="Facebook" eventKey="4">Panel 2 content</Panel>
 								<Panel header="Instagram" eventKey="5">Panel 2 content</Panel>
 								<Panel header="Site" eventKey="6">Panel 2 content</Panel>
-								<Panel header="Site" eventKey="7" header={<PanelHeader />}>Panel 2 content</Panel>
 							</Accordion>
 						</Row>
 					</Grid>
@@ -149,5 +148,6 @@ class Cadastrar extends React.Component {
 		)
 	}
 };
+								// <Panel eventKey="7" header={<PanelHeader />}>Panel 2 content</Panel>
 
 export default Cadastrar;
