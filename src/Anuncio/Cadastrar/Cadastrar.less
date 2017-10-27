@@ -1,13 +1,43 @@
 .cadastrarAnuncio {
+	.form-control, .react-toggle {
+		margin-top: 7px;
+	}
+
+
+	.toggle-group {
+		margin-top: 7px;
+		.label-default {
+			background-color: transparent;
+			span {
+				margin-left: 10px;
+			}
+		}
+
+		.react-toggle--checked {
+			.react-toggle-track {
+		  		background-color: #d90101;
+			}
+		}
+
+		.react-toggle--focus:not(.react-toggle--checked) {
+			.react-toggle-track {
+				background-color: #4d4d4d;
+			} 
+		}
+		.react-toggle--focus {
+			.react-toggle-thumb {
+				box-shadow: none;
+				-webkit-box-shadow: none;
+			}
+		}
+	}
+
 	.container.main-content {
 		padding: 0 4rem 0 4rem;
 		h3, span {
 			color: white;
 		}
 
-		.form-control, .react-toggle {
-			margin-top: 7px;
-		}
 
 		.no-padding {
 			padding: 0;
@@ -80,17 +110,6 @@
 
 		}
 
-		.toggle-group {
-			margin-top: 7px;
-			.label-default {
-				background-color: transparent;
-				span {
-					margin-left: 10px;
-				}
-			}
-		}
-
-
 		textarea.form-control{
 			height: 100px;
 			resize: none;
@@ -101,18 +120,21 @@
 		.panel-heading {
 			background-color: #2b2b2f;
 
+			a {
+			}
+
 			label::after {
-			  position: absolute;
-			  right: 0;
-			  top: 0;
-			  display: block;
-			  width: 3em;
-			  height: 3em;
-			  line-height: 3;
-			  text-align: center;
-			  -webkit-transition: all .35s;
-			  -o-transition: all .35s;
-			  transition: all .35s;
+				position: absolute;
+				right: 0;
+				top: 0;
+				display: block;
+				width: 3em;
+				height: 3em;
+				line-height: 3;
+				text-align: center;
+				-webkit-transition: all .35s;
+				-o-transition: all .35s;
+				transition: all .35s;
 			}
 		}
 
@@ -123,6 +145,8 @@
 		}
 
 		.panel-title a {
+			padding-left: 4rem !important;
+			padding-right: 4rem !important;
 			color: #fff;
 		    display: block;
 		    padding: 10px 15px;
@@ -146,6 +170,31 @@
 			background-color: #d90101;
 		}
 		
+
+		.panel-body {
+			background-color: #e5e5e5;
+			border-top: none;
+			padding-left: 4rem;
+			padding-right: 4rem;
+
+			.eu-sou-label {
+				padding: 10px 5px 0px 0px;
+			}
+
+			.third-checkbox {
+				margin-left: 10px;
+			}
+
+			.label-checkbox.label-default {
+				background-color: transparent;
+
+				span {
+					color: #333;
+					font-weight: 500;
+					margin-left: 5px;
+				}
+			}
+		}
 	}
 
 	.panel-group .panel+.panel {

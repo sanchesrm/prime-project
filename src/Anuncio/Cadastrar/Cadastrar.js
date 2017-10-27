@@ -134,12 +134,56 @@ class Cadastrar extends React.Component {
 						<Row><h3>Opções de Publicação</h3></Row>
 						<Row>
 							<Accordion> 
-								<Panel header="OLX" eventKey="1">Panel 1 content</Panel>
-								<Panel header="Mercado Livre" eventKey="2">Panel 2 content</Panel>
+								<Panel header="OLX" eventKey="1">
+									<Grid>
+										<Row><h4>Informações restantes</h4></Row>
+										<Row><FormControl placeholder="Categoria" /></Row>
+										<Row><FormControl placeholder="CEP" /></Row>
+										<Row><FormControl placeholder="Estado" /></Row>
+										<Row><FormControl placeholder="Região" /></Row>
+										<Row><FormControl placeholder="Município" /></Row>
+										<Row><FormControl placeholder="Bairro" /></Row>
+
+										<Row className="toggle-group">
+											<Col xs={2} className="eu-sou-label"> 
+												<span>Eu sou </span>
+											</Col>
+											<Col xs={4}>
+												<Label className="label-checkbox">
+													<Toggle icons={false} />
+													<span>Particular</span>
+												</Label>
+											</Col>
+											<Col xs={3} className="third-checkbox">
+												<Label className="label-checkbox">
+													<Toggle icons={false} />
+													<span>Profissional</span>
+												</Label>
+											</Col>
+										</Row>
+
+										<Row><FormControl placeholder="Empresa" /></Row>
+										<Row><FormControl placeholder="E-mail" /></Row>
+										<Row><FormControl placeholder="Telefone" /></Row>
+									</Grid>
+								</Panel>
+								<Panel header="Mercado Livre" eventKey="2">
+									<Grid>
+										<Row><h4>Informações restantes</h4></Row>
+										<Row><FormControl placeholder="Categoria" /></Row>
+										<Row><FormControl placeholder="Link do Youtube" /></Row>
+										<Row><FormControl placeholder="Estado" /></Row>
+										<Row><FormControl placeholder="Município" /></Row>
+										<Row><FormControl placeholder="Bairro" /></Row>
+										<Row><FormControl placeholder="Telefone" /></Row>
+										<Row><FormControl placeholder="Horário de Contato" /></Row>
+
+										<Row><h4>Escolha Tipo de Anúncio</h4></Row>
+									</Grid>
+								</Panel>
 								<Panel header="Facebook" eventKey="3">Panel 2 content</Panel>
-								<Panel header="Facebook" eventKey="4">Panel 2 content</Panel>
-								<Panel header="Instagram" eventKey="5">Panel 2 content</Panel>
-								<Panel header="Site" eventKey="6">Panel 2 content</Panel>
+								<Panel header="Instagram" eventKey="4">Panel 2 content</Panel>
+								<Panel header="Site" eventKey="5">Panel 2 content</Panel>
 							</Accordion>
 						</Row>
 					</Grid>

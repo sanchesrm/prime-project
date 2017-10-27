@@ -1,13 +1,32 @@
+.cadastrarAnuncio .form-control,
+.cadastrarAnuncio .react-toggle {
+  margin-top: 7px;
+}
+.cadastrarAnuncio .toggle-group {
+  margin-top: 7px;
+}
+.cadastrarAnuncio .toggle-group .label-default {
+  background-color: transparent;
+}
+.cadastrarAnuncio .toggle-group .label-default span {
+  margin-left: 10px;
+}
+.cadastrarAnuncio .toggle-group .react-toggle--checked .react-toggle-track {
+  background-color: #d90101;
+}
+.cadastrarAnuncio .toggle-group .react-toggle--focus:not(.react-toggle--checked) .react-toggle-track {
+  background-color: #4d4d4d;
+}
+.cadastrarAnuncio .toggle-group .react-toggle--focus .react-toggle-thumb {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
 .cadastrarAnuncio .container.main-content {
   padding: 0 4rem 0 4rem;
 }
 .cadastrarAnuncio .container.main-content h3,
 .cadastrarAnuncio .container.main-content span {
   color: white;
-}
-.cadastrarAnuncio .container.main-content .form-control,
-.cadastrarAnuncio .container.main-content .react-toggle {
-  margin-top: 7px;
 }
 .cadastrarAnuncio .container.main-content .no-padding {
   padding: 0;
@@ -65,15 +84,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-.cadastrarAnuncio .container.main-content .toggle-group {
-  margin-top: 7px;
-}
-.cadastrarAnuncio .container.main-content .toggle-group .label-default {
-  background-color: transparent;
-}
-.cadastrarAnuncio .container.main-content .toggle-group .label-default span {
-  margin-left: 10px;
-}
 .cadastrarAnuncio .container.main-content textarea.form-control {
   height: 100px;
   resize: none;
@@ -100,6 +110,8 @@
   border-top: none;
 }
 .cadastrarAnuncio .panel-group .panel-title a {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
   color: #fff;
   display: block;
   padding: 10px 15px;
@@ -118,6 +130,26 @@
 }
 .cadastrarAnuncio .panel-group .panel-title a:not(.collapsed) {
   background-color: #d90101;
+}
+.cadastrarAnuncio .panel-group .panel-body {
+  background-color: #e5e5e5;
+  border-top: none;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+.cadastrarAnuncio .panel-group .panel-body .eu-sou-label {
+  padding: 10px 5px 0px 0px;
+}
+.cadastrarAnuncio .panel-group .panel-body .third-checkbox {
+  margin-left: 10px;
+}
+.cadastrarAnuncio .panel-group .panel-body .label-checkbox.label-default {
+  background-color: transparent;
+}
+.cadastrarAnuncio .panel-group .panel-body .label-checkbox.label-default span {
+  color: #333;
+  font-weight: 500;
+  margin-left: 5px;
 }
 .cadastrarAnuncio .panel-group .panel + .panel {
   margin-top: 0px;
