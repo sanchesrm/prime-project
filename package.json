@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://sanchesrm.github.io/prime-project",
   "dependencies": {
+    "jquery": "^3.2.1",
     "node-less": "^1.0.0",
     "node-less-chokidar": "^0.1.2",
     "npm-run-all": "^4.1.1",
