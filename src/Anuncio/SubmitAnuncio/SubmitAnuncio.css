@@ -1,0 +1,47 @@
+.submitAnuncio span {
+  color: #fff;
+}
+.submitAnuncio h3.center {
+  color: white;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.submitAnuncio img.submit-status-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+}
+.submitAnuncio .results-container {
+  margin-top: 4rem;
+  margin-left: 9rem;
+  margin-right: 10rem;
+}
+.submitAnuncio .results-container .result {
+  margin-top: 7px;
+}
+.submitAnuncio .results-container .result span.status {
+  color: #3db39e;
+}
+.submitAnuncio .submit-btns {
+  position: absolute;
+  bottom: 3rem;
+  width: 100%;
+}
+.submitAnuncio .submit-btns .no-margins {
+  padding-right: 5px;
+}
+.submitAnuncio .submit-btns .btn {
+  width: 100%;
+  border-radius: 10px;
+  height: 45px;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.submitAnuncio .submit-btns .btn-create {
+  background-color: #000;
+  color: #fff;
+}
