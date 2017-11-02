@@ -1,7 +1,73 @@
-.editar-gallery h4 {
-  color: #dbdbdb;
+.editar-gallery {
+  margin-bottom: 25px;
 }
-.editar-gallery .announcement {
-  border: 1px;
+.editar-gallery h4 {
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #dbdbdb;
+  padding-top: 10px;
+}
+.editar-gallery .each-announcement {
+  border: 1px solid;
   border-color: #dbdbdb;
+  height: 155px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editar-gallery .each-announcement .announcement {
+  height: 90%;
+  width: 95%;
+  background-color: #2b2b2f;
+}
+.editar-gallery .each-announcement .announcement .imgColumn,
+.editar-gallery .each-announcement .announcement .infoColumn {
+  padding-right: 5px;
+  padding-left: 0px;
+  color: #fff;
+}
+.editar-gallery .each-announcement .announcement .imgColumn img,
+.editar-gallery .each-announcement .announcement .infoColumn img {
+  max-width: 100%;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .title,
+.editar-gallery .each-announcement .announcement .infoColumn .title {
+  font-size: 12px;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .infoDetail,
+.editar-gallery .each-announcement .announcement .infoColumn .infoDetail {
+  color: #7d7d7e;
+  font-size: 11px;
+  padding-top: 5px;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .infoDetail .col-xs-6,
+.editar-gallery .each-announcement .announcement .infoColumn .infoDetail .col-xs-6 {
+  padding-right: 5px;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .btn-div,
+.editar-gallery .each-announcement .announcement .infoColumn .btn-div {
+  position: absolute;
+  right: 0px;
+  margin-top: 5px;
+  margin-right: 1rem;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .btn-edit,
+.editar-gallery .each-announcement .announcement .infoColumn .btn-edit,
+.editar-gallery .each-announcement .announcement .imgColumn .btn-excluir,
+.editar-gallery .each-announcement .announcement .infoColumn .btn-excluir {
+  border: none;
+  color: #fff;
+  height: 25px;
+  line-height: 15px;
+  text-align: center;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .btn-edit,
+.editar-gallery .each-announcement .announcement .infoColumn .btn-edit {
+  background-color: #d90101;
+}
+.editar-gallery .each-announcement .announcement .imgColumn .btn-excluir,
+.editar-gallery .each-announcement .announcement .infoColumn .btn-excluir {
+  margin-right: 10px;
+  background-color: #000;
 }
