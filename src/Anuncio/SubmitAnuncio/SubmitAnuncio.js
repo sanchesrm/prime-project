@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../../NavBar/NavBar'
-import { Image, Row, Col, Grid } from 'react-bootstrap'
+import { Image, Row, Col } from 'react-bootstrap'
 import './SubmitAnuncio.css' 
 import submitSuccess from '../../images/submit_success.png'
 import { Link } from 'react-router-dom'

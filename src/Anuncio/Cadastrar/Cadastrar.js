@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Toggle from 'react-toggle'
-import { FormControl, Col, Row, Grid, Checkbox, Label, Panel, Accordion, Radio, Button, Glyphicon } from 'react-bootstrap'
+import { FormControl, Col, Row, Grid, Checkbox, Label, Panel, Accordion, Radio, Button, Glyphicon, Modal } from 'react-bootstrap'
 import NavBar from '../../NavBar/NavBar'
 import Gallery from '../Components/Gallery'
 import './Cadastrar.css'
@@ -11,6 +11,21 @@ class Cadastrar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.getPhoto = this.getPhoto.bind(this);
+		this.showModal = this.showModal.bind(this);
+		this.hideModal = this.hideModal.bind(this);
+
+		this.state = {
+			showModal: false
+		}
+	}
+
+	showModal() {
+		this.setState({ showModal: true });
+	}
+
+	hideModal() {
+		this.setState({ showModal: false });
 	}
 
 	componentDidMount() {
@@ -31,6 +46,24 @@ class Cadastrar extends React.Component {
 		event.preventDefault();
 		this.props.history.push('/SubmitAnuncio')
 	}
+
+    getPhoto(e) {
+        e.preventDefault();
+
+        var reader = new FileReader();
+        var file = e.target.files[0];
+
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+        	this.showModal();
+
+            // this.setState({
+            //     file: file,
+            //     imagePreviewUrl: reader.result
+            // });
+        }
+
+    }
 
 	render() {
 		return (
@@ -56,8 +89,9 @@ class Cadastrar extends React.Component {
 									</Radio>
 								</Col>
 								<Col xs={4} className="no-padding">
-									<Button className="icon-button">
+									<Button className="icon-button" id="camera-img" htmlFor="camera-input">
 										<Glyphicon glyph="camera"/>
+										<FormControl id="camera-input" type="file" accept="image/*" capture="camera" onChange={this.getPhoto}/> 
 									</Button>
 								</Col>
 							</Row>
@@ -294,6 +328,21 @@ class Cadastrar extends React.Component {
 					<div className="publish-button">
 						<Button type="submit" bsStyle="success" bsSize="large" >Publicar</Button>
 					</div>
+			        <Modal {...this.props} show={this.state.showModal} onHide={this.hideModal} dialogClassName="custom-modal" className="modal-container custom-map-modal" >
+						<Modal.Header closeButton>
+						</Modal.Header>
+						<Modal.Body>
+
+						</Modal.Body>
+						<Modal.Footer>
+							<Button onClick={this.hideModal} className="btn-repeat">
+								<Glyphicon glyph="repeat" />
+							</Button>
+							<Button onClick={this.hideModal} className="btn-ok">
+								<Glyphicon glyph="ok" />
+							</Button>
+						</Modal.Footer>
+					</Modal>
 				</form>
 			</div>
 		)
