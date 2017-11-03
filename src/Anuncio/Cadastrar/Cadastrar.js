@@ -6,6 +6,8 @@ import NavBar from '../../NavBar/NavBar'
 import Gallery from '../Components/Gallery'
 import './Cadastrar.css'
 import $ from 'jquery'
+import interact from 'interact.js'
+import prime_logo_photo from '../../images/prime_logo_photo.png'
 
 class Cadastrar extends React.Component {
 	constructor(props) {
@@ -16,7 +18,8 @@ class Cadastrar extends React.Component {
 		this.hideModal = this.hideModal.bind(this);
 
 		this.state = {
-			showModal: false
+			showModal: false,
+            imagePreviewUrl: ''
 		}
 	}
 
@@ -26,6 +29,14 @@ class Cadastrar extends React.Component {
 
 	hideModal() {
 		this.setState({ showModal: false });
+		interact('.resize-drag').unset();
+	}
+
+	rotateImg() {
+		var img_preview = $('#img-preview');
+		var angle = Number(img_preview.attr('class')) + 90;
+		img_preview.css('transform','rotate(' + angle + 'deg)');
+		img_preview.attr('class', angle);
 	}
 
 	componentDidMount() {
@@ -57,15 +68,74 @@ class Cadastrar extends React.Component {
         reader.onloadend = () => {
         	this.showModal();
 
-            // this.setState({
-            //     file: file,
-            //     imagePreviewUrl: reader.result
-            // });
+            this.setState({
+                imagePreviewUrl: reader.result
+            });
+
+        	this.setInteract();
         }
 
     }
 
+    setInteract() {
+        interact('.resize-drag')
+        .draggable({
+            inertia: true,
+            restrict: {
+                restriction: document.getElementById('img-preview'),
+                elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+                endOnly: true
+            }
+        })
+        .resizable({
+            preserveAspectRatio: true,
+            edges: { left: true, right: true, bottom: true, top: true }
+        })
+        .on('resizemove', function (event) {
+            var target = event.target,
+                x = (parseFloat(target.getAttribute('data-x')) || 0),
+                y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+            // update the element's style
+            target.style.width  = event.rect.width + 'px';
+            target.style.height = event.rect.height + 'px';
+
+            // translate when resizing from top or left edges
+            x += event.deltaRect.left;
+            y += event.deltaRect.top;
+
+            target.style.webkitTransform = target.style.transform =
+                'translate(' + x + 'px,' + y + 'px)';
+
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+        })
+        .on('dragmove', function (event) {
+            const target = event.target
+            // keep the dragged position in the data-x/data-y attributes
+            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+            // translate the element
+            target.style.webkitTransform =
+            target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)'
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+        })
+	}
+
 	render() {
+        var {imagePreviewUrl} = this.state;
+        var imagePreview = null;
+        var resizeContainer = null;
+        if (imagePreviewUrl) {
+            imagePreview = (<img src={imagePreviewUrl} id="img-preview" className="" />);
+            resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
+        }
+
 		return (
 			<div className="cadastrarAnuncio">
 				<NavBar />
@@ -328,14 +398,24 @@ class Cadastrar extends React.Component {
 					<div className="publish-button">
 						<Button type="submit" bsStyle="success" bsSize="large" >Publicar</Button>
 					</div>
-			        <Modal {...this.props} show={this.state.showModal} onHide={this.hideModal} dialogClassName="custom-modal" className="modal-container custom-map-modal" >
+
+			        <Modal show={this.state.showModal} onHide={this.hideModal} className="modal-container custom-map-modal" >
 						<Modal.Header closeButton>
 						</Modal.Header>
 						<Modal.Body>
-
+							<div className="car-image-div" id="car-image-div">
+								<div className="car-image-div" id="car-image-div">
+									<div className="car-image" id="car-image">
+										{imagePreview}
+									</div>
+									<div id="watermark-container" className="watermark-container">
+										{resizeContainer}
+									</div>
+								</div>
+							</div>
 						</Modal.Body>
 						<Modal.Footer>
-							<Button onClick={this.hideModal} className="btn-repeat">
+							<Button onClick={this.rotateImg} className="btn-repeat">
 								<Glyphicon glyph="repeat" />
 							</Button>
 							<Button onClick={this.hideModal} className="btn-ok">
@@ -348,5 +428,17 @@ class Cadastrar extends React.Component {
 		)
 	}
 };
+			        // <Modal {...this.props} show={this.state.showModal} onHide={this.hideModal} dialogClassName="custom-modal" className="modal-container custom-map-modal" >
+
+
+
+	// <div className="car-image-div" id="car-image-div">
+		// <div className="car-image" id="car-image">
+			// {imagePreview}
+		// </div>
+		// <div id="watermark-container" className="watermark-container">
+			// {resizeContainer}
+		// </div>
+	// </div>
 
 export default Cadastrar;

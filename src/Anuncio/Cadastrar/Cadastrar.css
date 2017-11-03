@@ -1,5 +1,5 @@
 .cadastrarAnuncio {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .cadastrarAnuncio .my-modal-dialog {
   min-width: 100%;
@@ -318,7 +318,7 @@
 .custom-map-modal .modal-content .modal-body {
   height: 75%;
   border: none;
-  background-color: #fff;
+  padding: 0px;
 }
 .custom-map-modal .modal-content .modal-footer {
   height: 15%;
@@ -339,4 +339,40 @@
 .custom-map-modal .modal-content .modal-footer .btn-repeat {
   position: absolute;
   left: 30px;
+}
+.custom-map-modal .car-image-div {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  touch-action: none;
+  /*img {
+			max-width: 100%;
+			max-height: 100%;
+		    position: absolute;
+		    margin: auto;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}*/
+}
+.custom-map-modal .car-image-div .car-image {
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+.custom-map-modal .car-image-div .car-image img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.custom-map-modal .watermark-container {
+  position: absolute;
+  top: 10%;
+  left: 0;
 }
