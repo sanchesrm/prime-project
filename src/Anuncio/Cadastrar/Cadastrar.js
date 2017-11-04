@@ -7,6 +7,7 @@ import Gallery from '../Components/Gallery'
 import './Cadastrar.css'
 import $ from 'jquery'
 import interact from 'interact.js'
+import html2canvas from 'html2canvas'
 import prime_logo_photo from '../../images/prime_logo_photo.png'
 
 class Cadastrar extends React.Component {
@@ -16,10 +17,13 @@ class Cadastrar extends React.Component {
 		this.getPhoto = this.getPhoto.bind(this);
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
+		this.saveImg = this.saveImg.bind(this);
+
 
 		this.state = {
 			showModal: false,
-            imagePreviewUrl: ''
+            imagePreviewUrl: '',
+            photos: []
 		}
 	}
 
@@ -37,6 +41,20 @@ class Cadastrar extends React.Component {
 		var angle = Number(img_preview.attr('class')) + 90;
 		img_preview.css('transform','rotate(' + angle + 'deg)');
 		img_preview.attr('class', angle);
+	}
+
+	saveImg() {
+		var this_local = this;
+		html2canvas(document.getElementById('car-image-div'), {
+			onrendered: function(canvas) {
+				var src = canvas.toDataURL();
+				this_local.setState({
+					photos: [...this_local.state.photos, { 'src_logo': src, 'src': this_local.state.imagePreviewUrl}]
+				});
+				console.log(this_local.state.photos.length);
+				this_local.hideModal();
+			}
+		});
 	}
 
 	componentDidMount() {
@@ -67,7 +85,7 @@ class Cadastrar extends React.Component {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
         	this.showModal();
-
+        	// console.log(reader.result);
             this.setState({
                 imagePreviewUrl: reader.result
             });
@@ -89,7 +107,8 @@ class Cadastrar extends React.Component {
         })
         .resizable({
             preserveAspectRatio: true,
-            edges: { left: true, right: true, bottom: true, top: true }
+            edges: { top: true }
+            // edges: { left: true, right: true, bottom: true, top: true }
         })
         .on('resizemove', function (event) {
             var target = event.target,
@@ -145,14 +164,14 @@ class Cadastrar extends React.Component {
 							<Row><h3>Cadastrar Anúncio</h3></Row>
 							<Row className="selecting-car-usage">
 								<Col xs={4} className="no-padding">
-									<Radio name="announcement-type">
+									<Radio name="car-state">
 										<div className="check">
 											<span>Novo</span>
 										</div>
 									</Radio>
 								</Col>
 								<Col xs={4} className="no-padding">
-									<Radio name="announcement-type">
+									<Radio defaultChecked name="car-state">
 										<div className="check">
 											<span>Usado</span>
 										</div>
@@ -390,7 +409,7 @@ class Cadastrar extends React.Component {
 							<Row><h3>Fotos do Anúncio</h3></Row>
 
 							<div className="thumbnail-container">
-								<Gallery />
+								<Gallery photos={this.state.photos} />
 							</div>
 						</Grid>	
 					</div>
@@ -418,7 +437,7 @@ class Cadastrar extends React.Component {
 							<Button onClick={this.rotateImg} className="btn-repeat">
 								<Glyphicon glyph="repeat" />
 							</Button>
-							<Button onClick={this.hideModal} className="btn-ok">
+							<Button onClick={this.saveImg} className="btn-ok">
 								<Glyphicon glyph="ok" />
 							</Button>
 						</Modal.Footer>

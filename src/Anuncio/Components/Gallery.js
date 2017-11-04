@@ -1,39 +1,41 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-import CustomThumbnail from './Thumbnail'
+import _ from 'lodash'
+import { Col, Thumbnail, Button, InputGroup, Glyphicon } from 'react-bootstrap'
+import thumbnail_img from '../../images/thumbnail.png'
 
 class Gallery extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	removeImgFromArray(i, ev) {
+		console.log("aqui");
+		this.props.photos.splice(i, 1);
+		this.setState({
+			photos: this.props.photos
+		})
+	}
+
 	render() {
+		if (!this.props.photos.length) {
+			return <div className="no-photos-selected"><Col xs={12}>Não há fotos selecionadas!</Col></div>
+		}
+
 		return (
 			<div>
-				<Row>
-					<Col xs={3}>
-						<CustomThumbnail />
+				{this.props.photos.map((list,i) => 
+					<Col xs={3} key={i}>
+						<InputGroup>
+							<Thumbnail href="#" src={list.src_logo} alt={thumbnail_img} />
+							<Button className="remove-button" bsSize="xs" onClick={this.removeImgFromArray.bind(this, i)}>
+								<Glyphicon glyph="remove"/>
+							</Button>
+							<Button className="edit-button" bsSize="xs">
+								<Glyphicon glyph="pencil"/>
+							</Button>
+						</InputGroup>
 					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-				</Row>
-				<Row>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-					<Col xs={3}>
-						<CustomThumbnail />
-					</Col>
-				</Row>
+				)}
 			</div>
 		)
 	}

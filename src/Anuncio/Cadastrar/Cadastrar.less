@@ -284,6 +284,8 @@
 			padding-left: 15px;
 			padding-right: 30px;
 			margin-top: 2rem;
+			margin-left: -15px;
+			margin-right: -15px;
 
 			.col-xs-3 {
 				padding-right: 0px;
@@ -311,6 +313,16 @@
 				padding-left: 4px;
 				padding-right: 4px;
 				color: #fff;
+				border: none;
+			}
+
+			.no-photos-selected {
+				margin-left: 15px;
+				color: #fff;
+			}
+
+			.thumbnail {
+				background-color: #000;
 				border: none;
 			}
 
@@ -430,7 +442,7 @@
 			height: 100%;
 			left: 0;
 
-			img {
+			img#img-preview {
 				max-width: 100%;
 				max-height: 100%;
 			    position: absolute;
@@ -441,21 +453,14 @@
 				bottom: 0;
 			}
 		}
-		/*img {
-			max-width: 100%;
-			max-height: 100%;
-		    position: absolute;
-		    margin: auto;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-		}*/
 	}
 
 	.watermark-container {
 		position: absolute;
-		top: 10%;
-		left: 0;
+		top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+		margin: auto;
 	}
 }
