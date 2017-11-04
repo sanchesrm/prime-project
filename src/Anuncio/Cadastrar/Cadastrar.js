@@ -23,12 +23,22 @@ class Cadastrar extends React.Component {
 		this.state = {
 			showModal: false,
             imagePreviewUrl: '',
-            photos: []
+            photos: [],
+            selected_photo: {},
 		}
 	}
 
 	showModal() {
-		this.setState({ showModal: true });
+		if (this.state.selected_photo.src) {
+            this.setState({
+                imagePreviewUrl: this.state.selected_photo.src,
+                showModal: true
+            });
+
+        	this.setInteract();
+		} else {
+			this.setState({ showModal: true });
+		}
 	}
 
 	hideModal() {
@@ -55,6 +65,15 @@ class Cadastrar extends React.Component {
 				this_local.hideModal();
 			}
 		});
+	}
+
+	editImgFromArray(i, ev) {
+		this.setState({
+			selected_photo: {
+				src: this.props.photos[i].src
+			}
+		})
+		this.props.showModal();
 	}
 
 	componentDidMount() {
@@ -85,7 +104,6 @@ class Cadastrar extends React.Component {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
         	this.showModal();
-        	// console.log(reader.result);
             this.setState({
                 imagePreviewUrl: reader.result
             });
@@ -107,8 +125,7 @@ class Cadastrar extends React.Component {
         })
         .resizable({
             preserveAspectRatio: true,
-            edges: { top: true }
-            // edges: { left: true, right: true, bottom: true, top: true }
+            edges: { left: true, right: true, bottom: true, top: true }
         })
         .on('resizemove', function (event) {
             var target = event.target,
@@ -409,7 +426,7 @@ class Cadastrar extends React.Component {
 							<Row><h3>Fotos do Anúncio</h3></Row>
 
 							<div className="thumbnail-container">
-								<Gallery photos={this.state.photos} />
+								<Gallery photos={this.state.photos} editImgFromArray={this.editImgFromArray} showModal={this.showModal} />
 							</div>
 						</Grid>	
 					</div>

@@ -9,7 +9,6 @@ class Gallery extends React.Component {
 	}
 
 	removeImgFromArray(i, ev) {
-		console.log("aqui");
 		this.props.photos.splice(i, 1);
 		this.setState({
 			photos: this.props.photos
@@ -30,7 +29,7 @@ class Gallery extends React.Component {
 							<Button className="remove-button" bsSize="xs" onClick={this.removeImgFromArray.bind(this, i)}>
 								<Glyphicon glyph="remove"/>
 							</Button>
-							<Button className="edit-button" bsSize="xs">
+							<Button className="edit-button" bsSize="xs" onClick={this.props.editImgFromArray.bind(this, i)}>
 								<Glyphicon glyph="pencil"/>
 							</Button>
 						</InputGroup>
