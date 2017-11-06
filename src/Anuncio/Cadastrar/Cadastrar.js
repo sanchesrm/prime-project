@@ -29,16 +29,16 @@ class Cadastrar extends React.Component {
 	}
 
 	showModal() {
-		if (this.state.selected_photo.src) {
-            this.setState({
-                imagePreviewUrl: this.state.selected_photo.src,
-                showModal: true
-            });
+		// if (this.state.selected_photo.src) {
+  //           this.setState({
+  //               imagePreviewUrl: this.state.selected_photo.src,
+  //               showModal: true
+  //           });
 
-        	this.setInteract();
-		} else {
+  //       	this.setInteract();
+		// } else {
 			this.setState({ showModal: true });
-		}
+		// }
 	}
 
 	hideModal() {
@@ -61,19 +61,22 @@ class Cadastrar extends React.Component {
 				this_local.setState({
 					photos: [...this_local.state.photos, { 'src_logo': src, 'src': this_local.state.imagePreviewUrl}]
 				});
-				console.log(this_local.state.photos.length);
+				// console.log(this_local.state.photos.length);
 				this_local.hideModal();
 			}
 		});
 	}
 
-	editImgFromArray(i, ev) {
+	editImgFromArray(i) {
 		this.setState({
 			selected_photo: {
-				src: this.props.photos[i].src
-			}
-		})
-		this.props.showModal();
+				src: this.state.photos[i].src,
+				src_logo: this.state.photos[i].src_logo,
+			},
+			imagePreviewUrl: this.state.photos[i].src,
+            showModal: true
+		});
+    	this.setInteract();
 	}
 
 	componentDidMount() {
@@ -168,6 +171,7 @@ class Cadastrar extends React.Component {
         var imagePreview = null;
         var resizeContainer = null;
         if (imagePreviewUrl) {
+        	// console.log("aqui " + imagePreviewUrl);
             imagePreview = (<img src={imagePreviewUrl} id="img-preview" className="" />);
             resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
         }
@@ -426,7 +430,7 @@ class Cadastrar extends React.Component {
 							<Row><h3>Fotos do Anúncio</h3></Row>
 
 							<div className="thumbnail-container">
-								<Gallery photos={this.state.photos} editImgFromArray={this.editImgFromArray} showModal={this.showModal} />
+								<Gallery photos={this.state.photos} showModal={this.state.showModal} imagePreviewUrl={this.state.imagePreviewUrl} showModal={this.showModal} editImgFromArray={this.editImgFromArray.bind(this)} />
 							</div>
 						</Grid>	
 					</div>
