@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom'
 
 
 class SubmitAnuncio extends React.Component {
+	constructor(props) {
+		super(props);
+		console.log(props);
+		this.state = {
+			form_cadastro: this.props.location.state.form_cadastró
+		}
+	}
+
 	render() {
 		return (
 			<div className="homePage">

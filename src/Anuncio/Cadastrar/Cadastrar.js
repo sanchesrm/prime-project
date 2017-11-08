@@ -18,6 +18,7 @@ class Cadastrar extends React.Component {
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
 		this.saveImg = this.saveImg.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 
 		this.state = {
@@ -25,20 +26,12 @@ class Cadastrar extends React.Component {
             imagePreviewUrl: '',
             photos: [],
             selected_photo: {},
+            form_cadastro: {}
 		}
 	}
 
 	showModal() {
-		// if (this.state.selected_photo.src) {
-  //           this.setState({
-  //               imagePreviewUrl: this.state.selected_photo.src,
-  //               showModal: true
-  //           });
-
-  //       	this.setInteract();
-		// } else {
-			this.setState({ showModal: true });
-		// }
+		this.setState({ showModal: true });
 	}
 
 	hideModal() {
@@ -61,7 +54,6 @@ class Cadastrar extends React.Component {
 				this_local.setState({
 					photos: [...this_local.state.photos, { 'src_logo': src, 'src': this_local.state.imagePreviewUrl}]
 				});
-				// console.log(this_local.state.photos.length);
 				this_local.hideModal();
 			}
 		});
@@ -93,9 +85,49 @@ class Cadastrar extends React.Component {
 			$('html,body').animate({scrollTop: this.state.mercado_livre}, 800);
 	}
 
+	handleInputChange(e){
+		this.setState({
+			form_cadastro: { 
+				...this.state.form_cadastro, [e.target.name]: e.target.value
+			}
+		});
+	}
+
+	handleCheckboxChange(e) {
+		this.setState({
+			form_cadastro: { 
+				...this.state.form_cadastro, [e.target.name]: e.target.checked
+			}
+		});	
+	}
+
+	handleToggleChange(e) {
+		this.setState({
+			form_cadastro: { 
+				...this.state.form_cadastro, [e.target.name]: e.target.value == 'on' ? true : false
+			}
+		});
+	}
+
+	handleRadioChange(e) {
+		this.setState({
+			form_cadastro: { 
+				...this.state.form_cadastro, [e.target.name]: e.target.value
+			}
+		});	
+	}
+
 	handleSubmit(event) {
 		event.preventDefault();
-		this.props.history.push('/SubmitAnuncio')
+		this.setState({
+			form_cadastro: { 
+				...this.state.form_cadastro, photos: this.state.photos
+			}
+		});
+		this.props.history.push({
+			pathname: '/SubmitAnuncio',
+			state: { form_cadastro: this.state.form_cadastro }
+		});
 	}
 
     getPhoto(e) {
@@ -113,7 +145,6 @@ class Cadastrar extends React.Component {
 
         	this.setInteract();
         }
-
     }
 
     setInteract() {
@@ -181,18 +212,18 @@ class Cadastrar extends React.Component {
 				<NavBar />
 				<form onSubmit={this.handleSubmit.bind(this)} >
 					<div className="container main-content">
-						<Grid>
+						<Grid id="main-grid">
 							<Row><h3>Cadastrar Anúncio</h3></Row>
 							<Row className="selecting-car-usage">
 								<Col xs={4} className="no-padding">
-									<Radio name="car-state">
+									<Radio name="car-state" value="novo" onChange={(e) => this.handleRadioChange(e)}>
 										<div className="check">
 											<span>Novo</span>
 										</div>
 									</Radio>
 								</Col>
 								<Col xs={4} className="no-padding">
-									<Radio defaultChecked name="car-state">
+									<Radio defaultChecked name="car-state" value="usado" onChange={(e) => this.handleRadioChange(e)}>
 										<div className="check">
 											<span>Usado</span>
 										</div>
@@ -205,41 +236,41 @@ class Cadastrar extends React.Component {
 									</Button>
 								</Col>
 							</Row>
-							<Row><FormControl placeholder="Título do Anúncio" /></Row>
-							<Row><FormControl placeholder="Marca" /></Row>
-							<Row><FormControl placeholder="Modelo" /></Row>
+							<Row><FormControl placeholder="Título do Anúncio" type="text" name="titulo_anuncio" onChange={(e) => this.handleInputChange(e)} /></Row>
+							<Row><FormControl placeholder="Marca" type="text" name="marca" onChange={(e) => this.handleInputChange(e)} /></Row>
+							<Row><FormControl placeholder="Modelo" type="text" name="modelo" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Ano" />
+									<FormControl placeholder="Ano" type="text" name="ano" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Modelo" />
+									<FormControl placeholder="Modelo" type="text" name="modelo" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 							</Row>
-							<Row><FormControl placeholder="Combustível" /></Row>
-							<Row><FormControl placeholder="Câmbio" /></Row>
+							<Row><FormControl placeholder="Combustível" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+							<Row><FormControl placeholder="Câmbio" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="KM" />
+									<FormControl placeholder="KM" type="text" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Cor" />
-								</Col>
-							</Row>
-							<Row>
-								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Tipo" />
-								</Col>
-								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Portas" />
+									<FormControl placeholder="Cor" type="text" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 							</Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Final da Placa" />
+									<FormControl placeholder="Tipo" type="text" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Preço" />
+									<FormControl placeholder="Portas" type="text" onChange={(e) => this.handleInputChange(e)} />
+								</Col>
+							</Row>
+							<Row>
+								<Col xs={6} className="no-padding first-child">
+									<FormControl placeholder="Final da Placa" type="text" onChange={(e) => this.handleInputChange(e)} />
+								</Col>
+								<Col xs={6} className="no-padding second-child">
+									<FormControl placeholder="Preço" type="text" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 							</Row>
 							<div className="checkbox-group">
@@ -249,27 +280,27 @@ class Cadastrar extends React.Component {
 									</Col>
 									<div className="checkboxes">
 										<Col xs={6} className="no-padding">
-											<Checkbox>
+											<Checkbox name="alarme" onChange={(e) => this.handleCheckboxChange(e)}>
 												<span>Alarme</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox>
+											<Checkbox name="ar_condicionado" onChange={(e) => this.handleCheckboxChange(e)}>
 												<span>Ar condicionado</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox>
+											<Checkbox name="direcao_hidraulica" onChange={(e) => this.handleCheckboxChange(e)}>
 												<span>Direção Hidráulica</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox>
+											<Checkbox name="travas_eletricas" onChange={(e) => this.handleCheckboxChange(e)}>
 												<span>Travas Elétricas</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox>
+											<Checkbox name="vidros_eletricos"  onChange={(e) => this.handleCheckboxChange(e)}>
 												<span>Vidros Elétricos</span>
 											</Checkbox>
 										</Col>
@@ -283,13 +314,13 @@ class Cadastrar extends React.Component {
 								<Row>
 									<Col xs={6} className="no-padding first-child">
 										<Label className="label-checkbox">
-											<Toggle icons={false} />
+											<Toggle icons={false} name="facebook"  onChange={(e) => this.handleToggleChange(e)} />
 											<span>Facebook</span>
 										</Label>
 									</Col>
 									<Col xs={6} className="no-padding first-child">
 										<Label className="label-checkbox">
-											<Toggle icons={false} />
+											<Toggle icons={false} name="instagram"  onChange={(e) => this.handleToggleChange(e)} />
 											<span>Instagram</span>
 										</Label>
 									</Col>
@@ -297,13 +328,13 @@ class Cadastrar extends React.Component {
 								<Row>
 									<Col xs={6} className="no-padding first-child">
 										<Label className="label-checkbox">
-											<Toggle icons={false} />
+											<Toggle icons={false} name="site"  onChange={(e) => this.handleToggleChange(e)} />
 											<span>Site</span>
 										</Label>
 									</Col>
 									<Col xs={6} className="no-padding first-child">
 										<Label className="label-checkbox">
-											<Toggle icons={false} />
+											<Toggle icons={false} name="olx"  onChange={(e) => this.handleToggleChange(e)} />
 											<span>OLX</span>
 										</Label>
 									</Col>
@@ -327,12 +358,12 @@ class Cadastrar extends React.Component {
 									<Panel header="OLX" eventKey="1" onClick={this.handleShow.bind(this, 'olx')} ref="olxPanel">
 										<Grid>
 											<Row><h4>Informações restantes</h4></Row>
-											<Row><FormControl placeholder="Categoria" /></Row>
-											<Row><FormControl placeholder="CEP" /></Row>
-											<Row><FormControl placeholder="Estado" /></Row>
-											<Row><FormControl placeholder="Região" /></Row>
-											<Row><FormControl placeholder="Município" /></Row>
-											<Row><FormControl placeholder="Bairro" /></Row>
+											<Row><FormControl placeholder="Categoria" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="CEP" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Estado" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Região" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Município" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Bairro" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 
 											<Row className="toggle-group">
 												<Col xs={2} className="eu-sou-label"> 
@@ -352,27 +383,27 @@ class Cadastrar extends React.Component {
 												</Col>
 											</Row>
 
-											<Row><FormControl placeholder="Empresa" /></Row>
-											<Row><FormControl placeholder="E-mail" /></Row>
-											<Row><FormControl placeholder="Telefone" /></Row>
+											<Row><FormControl placeholder="Empresa" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="E-mail" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Telefone" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 										</Grid>
 									</Panel>
 									<Panel header="Mercado Livre" eventKey="2" onClick={this.handleShow.bind(this, 'mercado_livre')} ref="mercado_livre">
 										<Grid>
 											<Row><h4>Informações restantes</h4></Row>
-											<Row><FormControl placeholder="Categoria" /></Row>
-											<Row><FormControl placeholder="Link do Youtube" /></Row>
-											<Row><FormControl placeholder="Estado" /></Row>
-											<Row><FormControl placeholder="Município" /></Row>
-											<Row><FormControl placeholder="Bairro" /></Row>
-											<Row><FormControl placeholder="Telefone" /></Row>
-											<Row><FormControl placeholder="Horário de Contato" /></Row>
+											<Row><FormControl placeholder="Categoria" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Link do Youtube" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Estado" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Município" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Bairro" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Telefone" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+											<Row><FormControl placeholder="Horário de Contato" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 
 											<Row><h4>Escolha Tipo de Anúncio</h4></Row>
 											<div className="selecting-announcement-type">
 												<Row>
 													<Col xs={5} className="no-padding">
-														<Radio name="announcement-type">
+														<Radio name="announcement-type" value="diamante" onChange={(e) => this.handleRadioChange(e)}>
 															<div className="check">
 																<span>Diamante</span>
 															</div>
@@ -384,7 +415,7 @@ class Cadastrar extends React.Component {
 												</Row>
 												<Row>
 													<Col xs={5} className="no-padding">
-														<Radio name="announcement-type">
+														<Radio name="announcement-type" value="ouro" onChange={(e) => this.handleRadioChange(e)}>
 															<div className="check">
 																<span>Ouro</span>
 															</div>
@@ -396,7 +427,7 @@ class Cadastrar extends React.Component {
 												</Row>
 												<Row>
 													<Col xs={5} className="no-padding">
-														<Radio name="announcement-type">
+														<Radio name="announcement-type" value="prata" onChange={(e) => this.handleRadioChange(e)}>
 															<div className="check">
 																<span>Prata</span>
 															</div>
@@ -408,7 +439,7 @@ class Cadastrar extends React.Component {
 												</Row>
 												<Row>
 													<Col xs={5} className="no-padding">
-														<Radio name="announcement-type">
+														<Radio name="announcement-type" value="gratuito" onChange={(e) => this.handleRadioChange(e)} defaultChecked>
 															<div className="check">
 																<span>Gratuito</span>
 															</div>
@@ -421,6 +452,12 @@ class Cadastrar extends React.Component {
 											</div>
 										</Grid>
 									</Panel>
+									<Panel header="Instagram" eventKey="3">
+									</Panel>
+									<Panel header="Facebook" eventKey="4">
+									</Panel>
+									<Panel header="Site" eventKey="5">
+									</Panel>
 								</Accordion>
 							</Row>
 						</Grid>
@@ -430,13 +467,13 @@ class Cadastrar extends React.Component {
 							<Row><h3>Fotos do Anúncio</h3></Row>
 
 							<div className="thumbnail-container">
-								<Gallery photos={this.state.photos} showModal={this.state.showModal} imagePreviewUrl={this.state.imagePreviewUrl} showModal={this.showModal} editImgFromArray={this.editImgFromArray.bind(this)} />
+								<Gallery photos={this.state.photos} editImgFromArray={this.editImgFromArray.bind(this)} />
 							</div>
 						</Grid>	
 					</div>
 
 					<div className="publish-button">
-						<Button type="submit" bsStyle="success" bsSize="large" >Publicar</Button>
+						<Button type="submit" bsStyle="success" bsSize="large">Publicar</Button>
 					</div>
 
 			        <Modal show={this.state.showModal} onHide={this.hideModal} className="modal-container custom-map-modal" >
@@ -468,8 +505,6 @@ class Cadastrar extends React.Component {
 		)
 	}
 };
-			        // <Modal {...this.props} show={this.state.showModal} onHide={this.hideModal} dialogClassName="custom-modal" className="modal-container custom-map-modal" >
-
 
 
 	// <div className="car-image-div" id="car-image-div">

@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { Col, Thumbnail, Button, InputGroup, Glyphicon } from 'react-bootstrap'
 import thumbnail_img from '../../images/thumbnail.png'
 
