@@ -441,6 +441,11 @@
 			width: 100%;
 			height: 100%;
 			left: 0;
+			position: relative;
+
+			.container-teste {
+				position: relative;
+			}
 
 			img#img-preview {
 				max-width: 100%;
@@ -451,6 +456,24 @@
 				left: 0;
 				right: 0;
 				bottom: 0;
+
+			}
+
+			img#img-preview:after {
+				position: absolute;
+				content:"these are the zoom buttons";
+				bottom: 0;
+				left: 0;
+				background-color: #654;
+			}
+
+			.loading-msg {
+				color: #fff;
+				width: 100%;
+				height: 100%;
+			    position: absolute;
+				top: 50%;
+				left: 35%;
 			}
 		}
 	}

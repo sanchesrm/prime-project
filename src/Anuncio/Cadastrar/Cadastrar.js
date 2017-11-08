@@ -18,6 +18,7 @@ class Cadastrar extends React.Component {
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
 		this.saveImg = this.saveImg.bind(this);
+		this.openModalManually = this.openModalManually.bind(this);
 
 
 		this.state = {
@@ -29,16 +30,11 @@ class Cadastrar extends React.Component {
 	}
 
 	showModal() {
-		// if (this.state.selected_photo.src) {
-  //           this.setState({
-  //               imagePreviewUrl: this.state.selected_photo.src,
-  //               showModal: true
-  //           });
+		this.setState({ showModal: true });
+	}
 
-  //       	this.setInteract();
-		// } else {
-			this.setState({ showModal: true });
-		// }
+	openModalManually() {
+		this.showModal();
 	}
 
 	hideModal() {
@@ -76,7 +72,7 @@ class Cadastrar extends React.Component {
 			imagePreviewUrl: this.state.photos[i].src,
             showModal: true
 		});
-    	this.setInteract();
+    	// this.setInteract();
 	}
 
 	componentDidMount() {
@@ -106,12 +102,11 @@ class Cadastrar extends React.Component {
 
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-        	this.showModal();
             this.setState({
                 imagePreviewUrl: reader.result
             });
 
-        	this.setInteract();
+        	// this.setInteract();
         }
 
     }
@@ -168,12 +163,11 @@ class Cadastrar extends React.Component {
 
 	render() {
         var {imagePreviewUrl} = this.state;
-        var imagePreview = null;
+        var imagePreview = (<div className="loading-msg"><span>Loading Image...</span></div>);
         var resizeContainer = null;
         if (imagePreviewUrl) {
-        	// console.log("aqui " + imagePreviewUrl);
-            imagePreview = (<img src={imagePreviewUrl} id="img-preview" className="" />);
-            resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
+            imagePreview = (<div><img src={imagePreviewUrl} id="img-preview" className="" /><div className="black-color-div"></div></div>);
+            // resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
         }
 
 		return (
@@ -199,7 +193,7 @@ class Cadastrar extends React.Component {
 									</Radio>
 								</Col>
 								<Col xs={4} className="no-padding">
-									<Button className="icon-button" id="camera-img" htmlFor="camera-input">
+									<Button className="icon-button" id="camera-img" htmlFor="camera-input" onClick={this.openModalManually}>
 										<Glyphicon glyph="camera"/>
 										<FormControl id="camera-input" type="file" accept="image/*" capture="camera" onChange={this.getPhoto}/> 
 									</Button>
