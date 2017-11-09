@@ -3,10 +3,6 @@ import { Col, Thumbnail, Button, InputGroup, Glyphicon } from 'react-bootstrap'
 import thumbnail_img from '../../images/thumbnail.png'
 
 class Gallery extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	removeImgFromArray(i, ev) {
 		this.props.photos.splice(i, 1);
 		this.setState({

@@ -371,6 +371,14 @@
   right: 0;
   bottom: 0;
 }
+.custom-map-modal .car-image-div .car-image .loading-msg {
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+}
 .custom-map-modal .watermark-container {
   position: absolute;
   top: 0;

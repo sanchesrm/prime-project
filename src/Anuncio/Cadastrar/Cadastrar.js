@@ -9,6 +9,7 @@ import $ from 'jquery'
 import interact from 'interact.js'
 import html2canvas from 'html2canvas'
 import prime_logo_photo from '../../images/prime_logo_photo.png'
+import NotificationSystem from 'react-notification-system'
 
 class Cadastrar extends React.Component {
 	constructor(props) {
@@ -19,6 +20,8 @@ class Cadastrar extends React.Component {
 		this.hideModal = this.hideModal.bind(this);
 		this.saveImg = this.saveImg.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.openModalManually = this.openModalManually.bind(this);
+		// this.addNotification = this.addNotification.bind(this);
 
 
 		this.state = {
@@ -34,6 +37,10 @@ class Cadastrar extends React.Component {
 		this.setState({ showModal: true });
 	}
 
+	openModalManually() {
+		this.showModal();
+	}
+
 	hideModal() {
 		this.setState({ showModal: false });
 		interact('.resize-drag').unset();
@@ -46,6 +53,17 @@ class Cadastrar extends React.Component {
 		img_preview.attr('class', angle);
 	}
 
+
+	addNotification = () => {
+		this._notificationSystem.addNotification({
+			message: 'Imagem Salva Com Sucesso!',
+			level: 'success',
+			position: 'bc',
+			autoDismiss: '3',
+			dismissible: false
+		});
+	}
+
 	saveImg() {
 		var this_local = this;
 		html2canvas(document.getElementById('car-image-div'), {
@@ -54,7 +72,10 @@ class Cadastrar extends React.Component {
 				this_local.setState({
 					photos: [...this_local.state.photos, { 'src_logo': src, 'src': this_local.state.imagePreviewUrl}]
 				});
+				this_local.addNotification();
 				this_local.hideModal();
+			}, fail: function() {
+				console.log("aqui");
 			}
 		});
 	}
@@ -68,7 +89,7 @@ class Cadastrar extends React.Component {
 			imagePreviewUrl: this.state.photos[i].src,
             showModal: true
 		});
-    	this.setInteract();
+    	// this.setInteract();
 	}
 
 	componentDidMount() {
@@ -76,6 +97,8 @@ class Cadastrar extends React.Component {
 			olxPanel: ReactDOM.findDOMNode(this.refs.olxPanel).offsetTop,
 			mercado_livre: ReactDOM.findDOMNode(this.refs.mercado_livre).offsetTop 
 		});
+
+		this._notificationSystem = this.refs.notificationSystem;
 	}
 
 	handleShow(elem) {
@@ -104,7 +127,7 @@ class Cadastrar extends React.Component {
 	handleToggleChange(e) {
 		this.setState({
 			form_cadastro: { 
-				...this.state.form_cadastro, [e.target.name]: e.target.value == 'on' ? true : false
+				...this.state.form_cadastro, [e.target.name]: e.target.value === 'on' ? true : false
 			}
 		});
 	}
@@ -143,7 +166,7 @@ class Cadastrar extends React.Component {
                 imagePreviewUrl: reader.result
             });
 
-        	this.setInteract();
+        	// this.setInteract();
         }
     }
 
@@ -197,15 +220,33 @@ class Cadastrar extends React.Component {
         })
 	}
 
+	createSelectItemsForYear() {
+		let items = [];   
+		items.push(<option key="" value="">Ano</option>) 
+		for (let i = new Date().getFullYear(); i >= 1970; i--) {             
+			items.push(<option key={i} value={i}>{i}</option>);
+		}
+		return items;
+	}
+
 	render() {
         var {imagePreviewUrl} = this.state;
-        var imagePreview = null;
+        var imagePreview = (<div className="loading-msg"><span>Loading Image...</span></div>);
         var resizeContainer = null;
         if (imagePreviewUrl) {
-        	// console.log("aqui " + imagePreviewUrl);
             imagePreview = (<img src={imagePreviewUrl} id="img-preview" className="" />);
-            resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
+            // resizeContainer = (<img className="resize-drag " src={prime_logo_photo} />);
         }
+
+		var style = {
+			NotificationItem: {
+				DefaultStyle: {
+					margin: '10px 5px 2px 1px',
+					height: '80px',
+					'font-size': '20px'
+				}
+			}
+		}
 
 		return (
 			<div className="cadastrarAnuncio">
@@ -230,7 +271,7 @@ class Cadastrar extends React.Component {
 									</Radio>
 								</Col>
 								<Col xs={4} className="no-padding">
-									<Button className="icon-button" id="camera-img" htmlFor="camera-input">
+									<Button className="icon-button" id="camera-img" htmlFor="camera-input" onClick={this.openModalManually}>
 										<Glyphicon glyph="camera"/>
 										<FormControl id="camera-input" type="file" accept="image/*" capture="camera" onChange={this.getPhoto}/> 
 									</Button>
@@ -241,13 +282,23 @@ class Cadastrar extends React.Component {
 							<Row><FormControl placeholder="Modelo" type="text" name="modelo" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Ano" type="text" name="ano" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="Ano" componentClass="select" name="ano" onChange={(e) => this.handleInputChange(e)}>
+										{ this.createSelectItemsForYear() }
+									</FormControl>
 								</Col>
 								<Col xs={6} className="no-padding second-child">
 									<FormControl placeholder="Modelo" type="text" name="modelo" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 							</Row>
-							<Row><FormControl placeholder="Combustível" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
+							<Row>
+								<FormControl placeholder="Combustível" type="text" componentClass="select" onChange={(e) => this.handleInputChange(e)}>
+									<option key="" value="">Combustível</option>
+									<option key="Gasolina" value="Gasolina">Gasolina</option>
+									<option key="Álcool" value="Álcool">Álcool</option>
+									<option key="Diesel" value="Diesel">Diesel</option>
+									<option key="GNV" value="GNV">GNV</option>
+								</FormControl>
+							</Row>
 							<Row><FormControl placeholder="Câmbio" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
@@ -501,6 +552,7 @@ class Cadastrar extends React.Component {
 						</Modal.Footer>
 					</Modal>
 				</form>
+				<NotificationSystem ref="notificationSystem" style={style} />
 			</div>
 		)
 	}
