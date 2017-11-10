@@ -2,7 +2,27 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: #fff;
+}
+.full-screen-div .another-div-for-background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/fundoLogin.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  opacity: 0.88;
+}
+.full-screen-div .prime-logo {
+  position: absolute;
+  width: 100%;
+  height: 12rem;
+  margin-top: 25vh;
+  background-size: 300px auto;
+  background-image: url(../images/prime_logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .full-screen-div .login-container {
   margin-top: 90%;

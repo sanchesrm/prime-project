@@ -8,7 +8,7 @@ import './Cadastrar.css'
 import $ from 'jquery'
 import interact from 'interact.js'
 import html2canvas from 'html2canvas'
-import prime_logo_photo from '../../images/prime_logo_photo.png'
+// import prime_logo_photo from '../../images/prime_logo_photo.png'
 import NotificationSystem from 'react-notification-system'
 
 class Cadastrar extends React.Component {
