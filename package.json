@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://sanchesrm.github.io/prime-project",
   "dependencies": {
+    "axios": "^0.17.1",
     "html2canvas": "^0.5.0-beta4",
     "interact.js": "^1.2.8",
     "jquery": "^3.2.1",
@@ -14,6 +15,7 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",
+    "react-loading": "^1.0.1",
     "react-notification-system": "^0.2.16",
     "react-router-dom": "^4.2.2",
     "react-toggle": "^4.0.2",

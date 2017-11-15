@@ -7,6 +7,15 @@
   color: #dbdbdb;
   padding-top: 10px;
 }
+.editar-gallery .spinner-loading {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10rem;
+}
+.editar-gallery .error-message {
+  color: white;
+  text-align: center;
+}
 .editar-gallery .each-announcement {
   border: 1px solid;
   border-color: #dbdbdb;
