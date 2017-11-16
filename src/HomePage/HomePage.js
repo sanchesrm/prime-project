@@ -5,10 +5,19 @@ import './HomePage.css'
 import cadastrar_novo from '../images/cadastrar_novo_anuncio.png'
 import editar_anuncio from '../images/editar_anuncio.png'
 import Buscar from '../Anuncio/Components/Buscar'
+import cookie from 'react-cookies'
 
 class HomePage extends React.Component {
 	constructor(props){
         super(props);
+
+    	this.state = {
+    		token: cookie.load('token')
+		};
+    	if (!this.state.token) {
+			this.props.history.push('/');
+    	}
+
         this.cadastrar_anuncio = this.cadastrar_anuncio.bind(this);
         this.editar_anuncio = this.editar_anuncio.bind(this);
     }

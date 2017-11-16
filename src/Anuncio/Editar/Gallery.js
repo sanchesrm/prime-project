@@ -6,6 +6,7 @@ import axios from 'axios'
 import ReactLoading from 'react-loading'
 import '../../HomePage/HomePage.css'
 import './Gallery.css'
+import cookie from 'react-cookies'
 
 import announcement_car from "../../images/announcement-car.png"
 
@@ -16,12 +17,16 @@ class Editar extends React.Component {
 		this.state = {
 			data: '',
 			loading: true,
-			error: ''
-		};
+			error: '',
+            token: cookie.load('token')
+		}
+		if (!this.state.token) {
+			this.props.history.push('/');
+    	}
 	}
 
 	componentDidMount() {
-		axios.get('http://app.devalex.me/anuncios')
+		axios.get('https://api.devalex.me/anuncios', { params: {token: this.state.token} })
 			.then(response => {
 				console.log(response);
 				this.setState({
@@ -47,126 +52,160 @@ class Editar extends React.Component {
 		} else if (this.state.error) {
 			content = <div className="error-message"><h2>Houve um erro ao sincronizar os anúncios!</h2></div>
 		} else { 
-			// content = this.state.data.map((user, index) => {
-			// 	return (
-			// 		<div key={index}>
-			// 			<b>Username:</b>&nbsp;{user.username},&nbsp;
-			// 			<b>Email:</b>&nbsp;{user.email}&nbsp;
-			// 		</div>
-			// 	);
-			// });
+			content = this.state.data.map((anuncio, index) => {
+				return (
+					<div className="each-announcement" key={index}>
+						<Row className="announcement">
+							<Col xs={5} className="imgColumn">
+								<img src={announcement_car} />
+							</Col>
+							<Col xs={7} className="infoColumn">
+								<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
+
+								<Row className="infoDetail">
+									<Col xs={6}>
+										Ano: 2012/2013
+									</Col>
+									<Col xs={6}>
+										KM: 78.000
+									</Col>
+								</Row>
+								<Row className="infoDetail">
+									<Col xs={6}>
+										Câmbio: Manual
+									</Col>
+									<Col xs={6}>
+										Final Place: 6
+									</Col>
+								</Row>
+								<Row className="infoDetail">
+									<Col xs={6}>
+										Cor: Cinza
+									</Col>
+								</Row>
+								<div className="btn-div">
+									<Button className="btn-excluir">Excluir</Button>
+									<Button className="btn-edit">Editar</Button>
+								</div>
+							</Col>
+						</Row>
+					</div>
+				);
+			});
+
+
 		
-			content = 
-				<div>
-					<div className="each-announcement">
-						<Row className="announcement">
-							<Col xs={5} className="imgColumn">
-								<img src={announcement_car} />
-							</Col>
-							<Col xs={7} className="infoColumn">
-								<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
+			// content = 
+			// 	<div>
+			// 		<div className="each-announcement">
+			// 			<Row className="announcement">
+			// 				<Col xs={5} className="imgColumn">
+			// 					<img src={announcement_car} />
+			// 				</Col>
+			// 				<Col xs={7} className="infoColumn">
+			// 					<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
 
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Ano: 2012/2013
-									</Col>
-									<Col xs={6}>
-										KM: 78.000
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Câmbio: Manual
-									</Col>
-									<Col xs={6}>
-										Final Place: 6
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Cor: Cinza
-									</Col>
-								</Row>
-								<div className="btn-div">
-									<Button className="btn-excluir">Excluir</Button>
-									<Button className="btn-edit">Editar</Button>
-								</div>
-							</Col>
-						</Row>
-					</div>
-					<div className="each-announcement">
-						<Row className="announcement">
-							<Col xs={5} className="imgColumn">
-								<img src={announcement_car} />
-							</Col>
-							<Col xs={7} className="infoColumn">
-								<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Ano: 2012/2013
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							KM: 78.000
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Câmbio: Manual
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							Final Place: 6
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Cor: Cinza
+			// 						</Col>
+			// 					</Row>
+			// 					<div className="btn-div">
+			// 						<Button className="btn-excluir">Excluir</Button>
+			// 						<Button className="btn-edit">Editar</Button>
+			// 					</div>
+			// 				</Col>
+			// 			</Row>
+			// 		</div>
+			// 		<div className="each-announcement">
+			// 			<Row className="announcement">
+			// 				<Col xs={5} className="imgColumn">
+			// 					<img src={announcement_car} />
+			// 				</Col>
+			// 				<Col xs={7} className="infoColumn">
+			// 					<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
 
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Ano: 2012/2013
-									</Col>
-									<Col xs={6}>
-										KM: 78.000
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Câmbio: Manual
-									</Col>
-									<Col xs={6}>
-										Final Place: 6
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Cor: Cinza
-									</Col>
-								</Row>
-								<div className="btn-div">
-									<Button className="btn-excluir">Excluir</Button>
-									<Button className="btn-edit">Editar</Button>
-								</div>
-							</Col>
-						</Row>
-					</div>
-					<div className="each-announcement">
-						<Row className="announcement">
-							<Col xs={5} className="imgColumn">
-								<img src={announcement_car} />
-							</Col>
-							<Col xs={7} className="infoColumn">
-								<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Ano: 2012/2013
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							KM: 78.000
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Câmbio: Manual
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							Final Place: 6
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Cor: Cinza
+			// 						</Col>
+			// 					</Row>
+			// 					<div className="btn-div">
+			// 						<Button className="btn-excluir">Excluir</Button>
+			// 						<Button className="btn-edit">Editar</Button>
+			// 					</div>
+			// 				</Col>
+			// 			</Row>
+			// 		</div>
+			// 		<div className="each-announcement">
+			// 			<Row className="announcement">
+			// 				<Col xs={5} className="imgColumn">
+			// 					<img src={announcement_car} />
+			// 				</Col>
+			// 				<Col xs={7} className="infoColumn">
+			// 					<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
 
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Ano: 2012/2013
-									</Col>
-									<Col xs={6}>
-										KM: 78.000
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Câmbio: Manual
-									</Col>
-									<Col xs={6}>
-										Final Place: 6
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Cor: Cinza
-									</Col>
-								</Row>
-								<div className="btn-div">
-									<Button className="btn-excluir">Excluir</Button>
-									<Button className="btn-edit">Editar</Button>
-								</div>
-							</Col>
-						</Row>
-					</div>	
-				</div>;
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Ano: 2012/2013
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							KM: 78.000
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Câmbio: Manual
+			// 						</Col>
+			// 						<Col xs={6}>
+			// 							Final Place: 6
+			// 						</Col>
+			// 					</Row>
+			// 					<Row className="infoDetail">
+			// 						<Col xs={6}>
+			// 							Cor: Cinza
+			// 						</Col>
+			// 					</Row>
+			// 					<div className="btn-div">
+			// 						<Button className="btn-excluir">Excluir</Button>
+			// 						<Button className="btn-edit">Editar</Button>
+			// 					</div>
+			// 				</Col>
+			// 			</Row>
+			// 		</div>	
+			// 	</div>;
 		}
 
 

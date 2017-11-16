@@ -10,6 +10,7 @@ import interact from 'interact.js'
 import html2canvas from 'html2canvas'
 // import prime_logo_photo from '../../images/prime_logo_photo.png'
 import NotificationSystem from 'react-notification-system'
+import cookie from 'react-cookies'
 
 class Cadastrar extends React.Component {
 	constructor(props) {
@@ -23,14 +24,17 @@ class Cadastrar extends React.Component {
 		this.openModalManually = this.openModalManually.bind(this);
 		// this.addNotification = this.addNotification.bind(this);
 
-
 		this.state = {
 			showModal: false,
             imagePreviewUrl: '',
             photos: [],
             selected_photo: {},
-            form_cadastro: {}
+            form_cadastro: {},
+            token: cookie.load('token')
 		}
+		if (!this.state.token) {
+			this.props.history.push('/');
+    	}
 	}
 
 	showModal() {

@@ -4,6 +4,7 @@ import { Image, Row, Col } from 'react-bootstrap'
 import './SubmitAnuncio.css' 
 import submitSuccess from '../../images/submit_success.png'
 import { Link } from 'react-router-dom'
+import cookie from 'react-cookies'
 
 
 class SubmitAnuncio extends React.Component {
@@ -11,8 +12,13 @@ class SubmitAnuncio extends React.Component {
 		super(props);
 		console.log(props);
 		this.state = {
-			form_cadastro: this.props.location.state.form_cadastró
+			form_cadastro: this.props.location.state ? this.props.location.state.form_cadastro : {},
+            token: cookie.load('token')
 		}
+		
+		if (!this.state.token) {
+			this.props.history.push('/');
+    	}
 	}
 
 	render() {
