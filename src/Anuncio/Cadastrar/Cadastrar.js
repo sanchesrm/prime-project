@@ -11,6 +11,7 @@ import html2canvas from 'html2canvas'
 // import prime_logo_photo from '../../images/prime_logo_photo.png'
 import NotificationSystem from 'react-notification-system'
 import cookie from 'react-cookies'
+import axios from 'axios'
 
 class Cadastrar extends React.Component {
 	constructor(props) {
@@ -22,7 +23,6 @@ class Cadastrar extends React.Component {
 		this.saveImg = this.saveImg.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.openModalManually = this.openModalManually.bind(this);
-		// this.addNotification = this.addNotification.bind(this);
 
 		this.state = {
 			showModal: false,
@@ -30,10 +30,29 @@ class Cadastrar extends React.Component {
             photos: [],
             selected_photo: {},
             form_cadastro: {},
-            token: cookie.load('token')
+            token: cookie.load('token'),
+            id_anuncio: this.props.location.state ? this.props.location.state.id_anuncio : null 
 		}
 		if (!this.state.token) {
 			this.props.history.push('/');
+    	} else if (this.state.id_anuncio) {
+			var self = this;
+			axios.get('https://api.devalex.me/anuncios/' + this.state.id_anuncio, { params: {token: this.state.token} })
+				.then(response => {
+					console.log(response.data);
+					self.setState({
+						form_cadastro: response.data,
+						loading: false
+					});
+				})
+				.catch(error => {
+					console.log('Error fetching and parsing data', error);
+					self.setState({
+						loading: false,
+						error: error
+					});
+				}
+			);
     	}
 	}
 
@@ -118,6 +137,7 @@ class Cadastrar extends React.Component {
 				...this.state.form_cadastro, [e.target.name]: e.target.value
 			}
 		});
+		// console.log(this.state.form_cadastro);
 	}
 
 	handleCheckboxChange(e) {
@@ -286,7 +306,7 @@ class Cadastrar extends React.Component {
 							<Row><FormControl placeholder="Modelo" type="text" name="modelo" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Ano" componentClass="select" name="ano" onChange={(e) => this.handleInputChange(e)}>
+									<FormControl placeholder="Ano" componentClass="select" name="ano" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.ano }>
 										{ this.createSelectItemsForYear() }
 									</FormControl>
 								</Col>
@@ -306,10 +326,10 @@ class Cadastrar extends React.Component {
 							<Row><FormControl placeholder="Câmbio" type="text" onChange={(e) => this.handleInputChange(e)} /></Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="KM" type="text" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="KM" type="text" name="km" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.km ? this.state.form_cadastro.km : "" } />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Cor" type="text" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="Cor" type="text" name="cor" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.cor ? this.state.form_cadastro.cor : "" }/>
 								</Col>
 							</Row>
 							<Row>
@@ -317,15 +337,15 @@ class Cadastrar extends React.Component {
 									<FormControl placeholder="Tipo" type="text" onChange={(e) => this.handleInputChange(e)} />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Portas" type="text" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="Portas" type="text" name="portas" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.portas ? this.state.form_cadastro.portas : "" } />
 								</Col>
 							</Row>
 							<Row>
 								<Col xs={6} className="no-padding first-child">
-									<FormControl placeholder="Final da Placa" type="text" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="Final da Placa" type="text" name="finalplace" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.finalplaca ? this.state.form_cadastro.finalplaca : ""  } />
 								</Col>
 								<Col xs={6} className="no-padding second-child">
-									<FormControl placeholder="Preço" type="text" onChange={(e) => this.handleInputChange(e)} />
+									<FormControl placeholder="Preço" type="text" name="preco" onChange={(e) => this.handleInputChange(e)} value={ this.state.form_cadastro.preco ? this.state.form_cadastro.preco : ""  } />
 								</Col>
 							</Row>
 							<div className="checkbox-group">
@@ -335,27 +355,27 @@ class Cadastrar extends React.Component {
 									</Col>
 									<div className="checkboxes">
 										<Col xs={6} className="no-padding">
-											<Checkbox name="alarme" onChange={(e) => this.handleCheckboxChange(e)}>
+											<Checkbox name="alarme" name="alarme" onChange={(e) => this.handleCheckboxChange(e)} checked={ this.state.form_cadastro.alarme == 'S' ? true : false } >
 												<span>Alarme</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox name="ar_condicionado" onChange={(e) => this.handleCheckboxChange(e)}>
+											<Checkbox name="ar_condicionado" name="ar" onChange={(e) => this.handleCheckboxChange(e)} checked={ this.state.form_cadastro.ar == 'S' ? true : false } >
 												<span>Ar condicionado</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox name="direcao_hidraulica" onChange={(e) => this.handleCheckboxChange(e)}>
+											<Checkbox name="direcao_hidraulica" name="direcao" onChange={(e) => this.handleCheckboxChange(e)} checked={ this.state.form_cadastro.direcao == 'S' ? true : false } >
 												<span>Direção Hidráulica</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox name="travas_eletricas" onChange={(e) => this.handleCheckboxChange(e)}>
+											<Checkbox name="travas_eletricas" name="trava" onChange={(e) => this.handleCheckboxChange(e)} checked={ this.state.form_cadastro.trava == 'S' ? true : false } >
 												<span>Travas Elétricas</span>
 											</Checkbox>
 										</Col>
 										<Col xs={6} className="no-padding">
-											<Checkbox name="vidros_eletricos"  onChange={(e) => this.handleCheckboxChange(e)}>
+											<Checkbox name="vidros_eletricos" name="vidro" onChange={(e) => this.handleCheckboxChange(e)} checked={ this.state.form_cadastro.vidro == 'S' ? true : false } >
 												<span>Vidros Elétricos</span>
 											</Checkbox>
 										</Col>
@@ -363,7 +383,7 @@ class Cadastrar extends React.Component {
 								</Row>
 							</div>
 							<Row>
-	      						<FormControl componentClass="textarea" placeholder="Observações do Vendedor" />
+	      						<FormControl componentClass="textarea" name="observacao" placeholder="Observações do Vendedor" value={ this.state.form_cadastro.observacao ? this.state.form_cadastro.observacao : ""  } />
 							</Row>
 							<div className="toggle-group">
 								<Row>

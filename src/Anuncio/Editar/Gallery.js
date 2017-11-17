@@ -44,6 +44,15 @@ class Editar extends React.Component {
 		);
 	}
 
+	handleEdit(ev, id_anuncio) {
+    	ev.preventDefault();
+
+		this.props.history.push({
+			pathname: '/Cadastrar',
+			state: { id_anuncio: id_anuncio }
+		});
+	}
+
 	render() {
 		let content;
 
@@ -54,38 +63,38 @@ class Editar extends React.Component {
 		} else { 
 			content = this.state.data.map((anuncio, index) => {
 				return (
-					<div className="each-announcement" key={index}>
+					<div className="each-announcement" key={anuncio.id}>
 						<Row className="announcement">
 							<Col xs={5} className="imgColumn">
-								<img src={announcement_car} />
+								<img src="" />
 							</Col>
 							<Col xs={7} className="infoColumn">
-								<span className="title">VOLKSWAGEN FOX 1.0 MI 8V FLEX 4P MANUAL</span>
+								<span className="title"></span>
 
 								<Row className="infoDetail">
 									<Col xs={6}>
-										Ano: 2012/2013
+										Ano: { anuncio.ano }
 									</Col>
 									<Col xs={6}>
-										KM: 78.000
-									</Col>
-								</Row>
-								<Row className="infoDetail">
-									<Col xs={6}>
-										Câmbio: Manual
-									</Col>
-									<Col xs={6}>
-										Final Place: 6
+										KM: { anuncio.km }
 									</Col>
 								</Row>
 								<Row className="infoDetail">
 									<Col xs={6}>
-										Cor: Cinza
+										Câmbio: 
+									</Col>
+									<Col xs={6}>
+										Final Place: { anuncio.finalplaca }
+									</Col>
+								</Row>
+								<Row className="infoDetail">
+									<Col xs={6}>
+										Cor: { anuncio.cor }
 									</Col>
 								</Row>
 								<div className="btn-div">
 									<Button className="btn-excluir">Excluir</Button>
-									<Button className="btn-edit">Editar</Button>
+									<Button className="btn-edit" onClick={(e) => this.handleEdit(e, anuncio.id)}>Editar</Button>
 								</div>
 							</Col>
 						</Row>
